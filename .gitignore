@@ -1,0 +1,7 @@
+.venv/
+node_modules/
+.vscode/
+db.sqlite3
+.idea/
+__pycache__/
+frontend-react/build/
