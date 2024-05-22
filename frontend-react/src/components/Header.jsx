@@ -1,9 +1,12 @@
 import React from 'react'
 
 import '../assets/css/Header.css';
+import { Link, useOutletContext } from 'react-router-dom';
 
 function Header() {
-  return (
+	const {auth} = useOutletContext()
+
+	return (
 
 	<div className="navbar">
 		<nav>
@@ -12,17 +15,31 @@ function Header() {
 			</div>
 			<ul className="navigation">
 				<li>
-					<a href="/home"> Home </a>
+					<Link to="/welcome">welcome</Link>
 				</li>
 				<li>
-					<a href="/user/dashboard"> Dashboard </a>
+					<Link to="/profile">Profile</Link>
 				</li>
 				<li>
-					<a href="/market"> Book </a>
+					<Link to="/about">About</Link>
 				</li>
 				<li>
-					<a href="/auth/login"> Login </a>
+					<Link to='/email/verification'>Email Verification</Link>
 				</li>
+				<li>
+					<Link to="/login">Login</Link>
+				</li>
+				<li>
+					<Link to="/signin">SignIn</Link>
+				</li>
+				{
+					auth && auth.is_authenticated() && 
+					(
+						<li>
+						<Link to="/logout">Logout</Link>
+						</li>
+					)
+				}
 			</ul>
 
 			<div className="hamburger">
@@ -33,7 +50,7 @@ function Header() {
 		</nav>
 	</div>
 
-  )
+	)
 }
 
 export default Header
