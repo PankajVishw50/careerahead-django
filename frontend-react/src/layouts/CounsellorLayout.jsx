@@ -1,8 +1,14 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useOutletContext } from 'react-router-dom'
 
 function CounsellorLayout() {
-  return <Outlet/>
+  const {auth} = useOutletContext()
+  
+  return <Outlet
+  context={{
+      auth
+  }}
+  />
 }
 
 export default CounsellorLayout

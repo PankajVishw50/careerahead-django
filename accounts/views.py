@@ -5,24 +5,25 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.validators import validate_email, MaxLengthValidator
 from urllib.parse import urljoin
 import datetime 
+import uuid
+import requests
+from django.conf import settings
+import os 
 
 from utils.http import make_response
 from accounts.models import CustomUserModel
+from counsellor.models import CounsellorType
+from careerahead.configs import MULTIAVATAR_URL, MULTIAVATAR_API_KEY
+from utils.user import get_me_serialized
+
+from utils.decorators import allowed_http_methods
 
 # Create your views here.
+
+@allowed_http_methods(['POST'])
 def login_view(req):
     response = HttpResponse()
 
-    # This function only accepts GET requests
-    if (req.method != 'POST'):
-        return make_response(
-            response,
-            {
-                'statusCode': 405,
-                'message': 'Method not allowed',
-            },
-            405,
-        )
 
     # Load Data
     try:
@@ -61,27 +62,9 @@ def login_view(req):
     # Login 
     login(req, user)
 
-    # Preparing data to send
-    response_data = {
-        'data': {
-            'email': user.email,
-            'username': user.username,
-            'is_counsellor': user.is_counsellor,
-            'setup': user.setup,
-            'email_meta': None,
-        }
-    }
-
-    if hasattr(user, 'emailverification'):
-        response_data['data']['email_meta'] = {
-            'verified': user.emailverification.verified,
-            'expiry_date': user.emailverification.expiry_date.isoformat(),
-        }
-
-
     return make_response(
         response, 
-        response_data,
+        get_me_serialized(user),
     )
 
 
@@ -96,20 +79,9 @@ def logout_view(req):
     )
 
 
+@allowed_http_methods(['POST'])
 def signin_view(req):
     response = HttpResponse()
-
-    # This function only accepts GET requests
-    if (req.method != 'POST'):
-        return make_response(
-            response,
-            {
-                'statusCode': 405,
-                'message': 'Method not allowed',
-            },
-            405,
-        )
-
 
     # Load Data
     try:
@@ -203,4 +175,82 @@ def email_verification(req):
     req.user.emailverification.save()
 
     return redirect(f"/email/verification?msg=successfully verified your email")
+
+@allowed_http_methods(['POST'])
+def setup_view(req):
+    response = HttpResponse()
+
+    # Load Data
+    try:
+        _data = req.body
+        obj_data = json.loads(_data)
+        image = obj_data.get('avatar')
+        types = obj_data.get('types')
+        image_uuid = uuid.UUID(image).hex + '.svg'
+
+        if not (image and types):
+            raise ValueError('image and types not provided')
+        
+    except Exception as e:
+        print(e)
+        return make_response(
+            response, 
+            {
+                'statusCode': 400,
+                'message': 'Please provide valid image uuid and types in json object'
+            },
+            400
+        )
+    
+    user = req.user
+
+    # fetch the image
+    image_response = requests.get(urljoin(MULTIAVATAR_URL, image_uuid), params={
+        'apikey': MULTIAVATAR_API_KEY
+    })
+
+    if image_response.status_code != 200:
+        return make_response(
+            response,
+            {
+                'statusCode': 400,
+                'message': 'Something went wrong try again'
+            },
+            400
+        )
+
+    file_path = os.path.join(settings.BASE_DIR, 'static', 'images', 'user', image_uuid)
+    rel_file_path = os.path.join('static', 'images', 'user', image_uuid)
+    with open(file_path, 'w+') as file:
+        file.write(image_response.text)
+
+    user.image = rel_file_path
+    user.setup = True
+    types_db = CounsellorType.objects.filter(pk__in=types)
+    user.counsellortype_set.add(*types_db)
+    user.save()
+
+        # Preparing data to send
+    response_data = {
+        'updated': True,
+        'data': {
+            'email': user.email,
+            'username': user.username,
+            'is_counsellor': user.is_counsellor,
+            'setup': user.setup,
+            'email_meta': None,
+        }
+    }
+
+    if hasattr(user, 'emailverification'):
+        response_data['data']['email_meta'] = {
+            'verified': user.emailverification.verified,
+            'expiry_date': user.emailverification.expiry_date.isoformat(),
+        }
+
+    return make_response(
+        response, 
+        response_data,
+    )
+
 

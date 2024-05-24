@@ -9,6 +9,12 @@ import LogoutPage from './routes/LogoutPage';
 import Welcome from './routes/Welcome';
 import SignInPage from './routes/SignInPage';
 import EmailVerificationPage from './routes/EmailVerificationPage';
+import SetupPage from './routes/SetupPage';
+import UserDashboardPage from './routes/UserDashboard';
+import CounsellorDashboard from './routes/CounsellorDashboard';
+import MarketPage from './routes/MarketPage';
+import CounsellorProfileView from './components/CounsellorProfileView';
+import CounsellorPost from './routes/CounsellorPost';
 
 const router = createBrowserRouter([
     {
@@ -53,8 +59,24 @@ const router = createBrowserRouter([
                                 element: <EmailVerificationPage/>,
                             },
                             {
+                                path: '/user/dashboard',
+                                element: <UserDashboardPage/>
+                            },
+                            {
+                                path: '/market',
+                                element: <MarketPage/>
+                            },
+                            {
+                                path: '/counsellor/:counsellorId',
+                                element: <CounsellorPost/>
+                            },
+                            {
                                 element: <CounsellorLayout/>,
                                 children: [
+                                    {
+                                        path: 'counsellor/dashboard',
+                                        element: <CounsellorDashboard/>
+                                    },
                                     {
                                         path: 'about',
                                         element: <h1>About Page</h1>
@@ -67,6 +89,16 @@ const router = createBrowserRouter([
                                 element: <h1>Profile Page</h1>
                             },
                         ]
+                    },
+                ]
+            },
+
+            {
+                element: <UserLayout/>,
+                children: [
+                    {
+                        path: 'setup',
+                        element: <SetupPage/>,
                     },
                 ]
             }

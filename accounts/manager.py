@@ -31,4 +31,14 @@ class CustomUserManager(BaseUserManager):
         kwargs.setdefault('verified', True)
 
         return self.create_user(email, username, password, **kwargs)
+        
+
+    def create_counsellor(self, email, username, password, **extra_fields):
+        from counsellor.models import Counsellor
+
+        user = self.create_user(email, username, password, verified=True, is_counsellor=True)
+        counsellor = Counsellor.objects.create(user=user, **extra_fields)
+        counsellor.save()
+
+        return counsellor
 

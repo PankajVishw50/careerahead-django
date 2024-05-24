@@ -19,6 +19,9 @@
     font-family: var(--text-small-straight);
     font-size: 15px;
     font-weight: bolder;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .btn-green-edit:hover{
     border-top: 0;

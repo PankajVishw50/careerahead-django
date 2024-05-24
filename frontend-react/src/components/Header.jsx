@@ -18,13 +18,17 @@ function Header() {
 					<Link to="/welcome">welcome</Link>
 				</li>
 				<li>
-					<Link to="/profile">Profile</Link>
+					<Link to="/user/dashboard">user Dashboard</Link>
 				</li>
 				<li>
-					<Link to="/about">About</Link>
+					<Link to="/counsellor/dashboard">counsellor Dashboard</Link>
 				</li>
+
 				<li>
 					<Link to='/email/verification'>Email Verification</Link>
+				</li>
+				<li>
+					<Link to='/setup'>Setup</Link>
 				</li>
 				<li>
 					<Link to="/login">Login</Link>
