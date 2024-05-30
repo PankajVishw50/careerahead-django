@@ -121,7 +121,6 @@ def get_counsellors(req):
     )
 
 
-
 @allowed_http_methods(['GET'])
 def get_counsellor(req, id):
     response = HttpResponse()
@@ -305,6 +304,21 @@ def request_contact(req, id):
                 None,
             )
         )   
+
+        send_mail(
+            [req.user.email],
+            'Contact Request', 
+            'Nothing',
+            render_to_string(
+                'contact-request-user.html', {
+                    'data': context,
+                },
+                req,
+                None,
+            )
+        )   
+
+
 
         appointment.save()
     except Exception as e:

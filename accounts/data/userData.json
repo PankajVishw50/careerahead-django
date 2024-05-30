@@ -1,0 +1,102 @@
+[
+    {
+        "model": "accounts.CustomUserModel",
+        "fields": {
+            "email": "ravi-warrior@example.com",
+            "username": "ravi kashyap",
+            "gender": "male",
+            "age": 12,
+            "password": "ravi123"
+        }
+    },
+    {
+        "model": "accounts.CustomUserModel",
+        "fields": {
+            "email": "sita-mahadevi@example.com",
+            "username": "sita mahadevi",
+            "gender": "female",
+            "age": 25,
+            "password": "sita123"
+        }
+    },
+    {
+        "model": "accounts.CustomUserModel",
+        "fields": {
+            "email": "alex-wolf@example.com",
+            "username": "alex wolf",
+            "gender": "other",
+            "age": 30,
+            "password": "alex123"
+        }
+    },
+    {
+        "model": "accounts.CustomUserModel",
+        "fields": {
+            "email": "john-doe@example.com",
+            "username": "john doe",
+            "gender": "male",
+            "age": 45,
+            "password": "john123"
+        }
+    },
+    {
+        "model": "accounts.CustomUserModel",
+        "fields": {
+            "email": "jane-doe@example.com",
+            "username": "jane doe",
+            "gender": "female",
+            "age": 22,
+            "password": "jane123"
+        }
+    },
+    {
+        "model": "accounts.CustomUserModel",
+        "fields": {
+            "email": "chris-patel@example.com",
+            "username": "chris patel",
+            "gender": "male",
+            "age": 29,
+            "password": "chris123"
+        }
+    },
+    {
+        "model": "accounts.CustomUserModel",
+        "fields": {
+            "email": "emma-stone@example.com",
+            "username": "emma stone",
+            "gender": "female",
+            "age": 34,
+            "password": "emma123"
+        }
+    },
+    {
+        "model": "accounts.CustomUserModel",
+        "fields": {
+            "email": "taylor-kim@example.com",
+            "username": "taylor kim",
+            "gender": "other",
+            "age": 40,
+            "password": "taylor123"
+        }
+    },
+    {
+        "model": "accounts.CustomUserModel",
+        "fields": {
+            "email": "david-lee@example.com",
+            "username": "david lee",
+            "gender": "male",
+            "age": 38,
+            "password": "david123"
+        }
+    },
+    {
+        "model": "accounts.CustomUserModel",
+        "fields": {
+            "email": "lucy-li@example.com",
+            "username": "lucy li",
+            "gender": "female",
+            "age": 28,
+            "password": "lucy123"
+        }
+    }
+]

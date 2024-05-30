@@ -44,6 +44,12 @@ class CustomUserModel(AbstractUser):
         blank=True
     )
 
+    # age = models.IntegerField(
+    #     blank=True,
+    #     null=True,
+    #     validators=[IntegerRangeValidator(12, 150)]
+    # )
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 

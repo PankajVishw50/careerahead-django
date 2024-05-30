@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Request</title>
+
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        h1{
+            width: 100%;
+            text-align: center;
+        }
+
+        .user{
+            border-bottom: 1px dotted gray;
+            padding-bottom: 25px;
+        }
+        .user__details{
+            width: 100%;
+        }
+        
+        .user__label{
+            display: inline-block;
+            width: 200px;
+            padding: 5px;
+        }
+        
+        .button-wrapper{
+            margin-top: 25px;
+            margin-bottom: 25px;
+        }
+        .accept_request_btn{
+            padding: 10px 15px;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            background: #059862;
+            border-radius: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="mail-wrapper">
+
+        <div class="mail">
+            <h1>You have requested an Contact Request</h1>
+            <p>you will get the contact request as soon as the other party accepted your request</p>
+        </div>
+
+        <div class="user">
+            <h3>
+                --- User ---
+            </h3>
+            <div class="user__details">
+                <span class="user__label">
+                    Username
+                </span>
+
+                <span class="user__value">
+                    {{ data.user.username }}
+                </span>
+            </div>
+
+            <div class="user__details">
+                <span class="user__label">
+                    Email
+                </span>
+
+                <span class="user__value">
+                    {{ data.user.email }}
+                </span>
+            </div>
+
+            <div class="user__details">
+                <span class="user__label">
+                    Contact
+                </span>
+
+                <span class="user__value">
+                    {{ data.user.contact|default:"<span style='color: red'>X</span>" }}
+                </span>
+            </div>
+
+
+
+        </div>
+
+
+        <div class="user">
+            <h3>
+                --- Appointment ---
+            </h3>
+            <div class="user__details">
+                <span class="user__label">
+                    Preffered Date Slot
+                </span>
+
+                <span class="user__value">
+                    {{ data.user.username }}
+                </span>
+            </div>
+
+            <div class="user__details">
+                <span class="user__label">
+                    Preffered Time Slot
+                </span>
+
+                <span class="user__value">
+                    {{ data.user.email }}
+                </span>
+            </div>
+
+            <div class="user__details">
+                <span class="user__label">
+                    Note
+                </span>
+
+                <span class="user__value">
+                    {{ data.note }}
+                </span>
+            </div>
+
+            
+        </div>
+        
+        <div class='button-wrapper'>
+
+            <a href="http://localhost:8000/user/dashboard" class="accept_request_btn">
+                View Profile
+            </a>
+
+        </div>
+
+
+    </div>
+    
+</body>
+</html>

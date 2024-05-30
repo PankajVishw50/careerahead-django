@@ -14,11 +14,11 @@ export default function Appoint({counsellor}){
     console.log('then date is: ', then_date)
 
     const [formData, setFormData] = useState({
-        note: 'mfewl fewlkf welfjw elfkwje flkwej flwe fjwekfj ewl;fkwje lf',
-        fromDate: '2024-05-28',
-        toDate: '2024-06-03',
-        fromTime: '10:00',
-        toTime: '12:00',
+        note: '',
+        fromDate: '',
+        toDate: '',
+        fromTime: '',
+        toTime: '',
     });
 
 
