@@ -2,17 +2,22 @@ import { useState, useEffect } from 'react'
 import PaginationController from '../utils/PaginationController'
 
 import '../assets/css/QuestionSection.css'
+import AskQuestion from './AskQuestion';
+import { useOutletContext } from 'react-router-dom';
 
 export default function QuestionSection({counsellor}){
+    const {auth, modal} = useOutletContext()
     const [,forceUpdate] = useState(0)
-    const [questions, setQuestions] = useState([])
-    const [page, setPage] = useState(0)
-    const [size, setSize] = useState(3)
+    const [questions, setQuestions] = useState([]);
+    const [page, setPage] = useState(0);
+    const [size, setSize] = useState(3);
+
     const range = PaginationController.get_range(page, size)
     const url = `/api/counsellor/${counsellor && counsellor.id}/questions`
     let [pagination_controller,] = useState(new PaginationController(url, handle_data, forceUpdate, [page, setPage], [size, setSize]))
-
     pagination_controller.setup(url, [page, setPage], [size, setSize])
+
+    const [ask, setAsk] = useState(false);
     
     useEffect(() => {
         if (counsellor.id){
@@ -44,7 +49,9 @@ export default function QuestionSection({counsellor}){
     return (
 
         <div className="question-section-wrapper">
-`            <div className="question-section">
+            <div className="question-section">
+
+                { ask && <AskQuestion counsellor_id={counsellor.id} user_id={auth.data.id} askPanel={setAsk}/>}
 
                 {
                     questions.slice(range[0], range[1]).map((question, index) => {
@@ -119,6 +126,22 @@ export default function QuestionSection({counsellor}){
                     e.preventDefault()
                     pagination_controller.nav(1)
                 }}>Next</a>
+
+                
+                {
+                    !ask && (
+                        <a href="#ask-question"
+                        className='question__nav-link question__ask-question'
+                        onClick={(e) => {
+                            setAsk(prevData => !prevData)
+                        }}
+                        >
+                            Ask a question
+                        </a>
+                    )
+                }
+
+
             </div>
 
 

@@ -103,7 +103,13 @@ class Question(models.Model):
     )
 
     posting_time = models.DateTimeField(auto_now_add=True)
-    answer_time = models.DateTimeField()
+    answer_time = models.DateTimeField(
+        blank=True, 
+        null=True,
+    )
+
+    def __str__(self):
+        return f"{self.counsellor.user.username} -> {self.user.username} ({self.question[:10]})"
 
 class Appointment(models.Model):
 

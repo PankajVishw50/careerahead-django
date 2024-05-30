@@ -3,6 +3,7 @@ import PaginationController from "../utils/PaginationController"
 import ReviewCard from "./ReviewCard"
 
 import '../assets/css/Reviews.css';
+import PostReview from "./PostReview";
 
 export default function Reviews({counsellor}) {
 
@@ -17,6 +18,8 @@ export default function Reviews({counsellor}) {
     let [pagination_controller,] = useState(new PaginationController(url, handle_data, forceUpdate, [page, setPage], [size, setSize]))
 
     pagination_controller.setup(url, [page, setPage], [size, setSize])
+
+    const [postReviewPanel, setPostReviewPanel] = useState(false) 
     
     useEffect(() => {
         if (counsellor.id){
@@ -49,7 +52,12 @@ export default function Reviews({counsellor}) {
 
         <div className="reviews">
 
+            {
+                postReviewPanel && <PostReview counsellor_id={counsellor.id} setPostReviewPanel={setPostReviewPanel} forceUpdate={forceUpdate}/>
+            }
+
             <div className="review__cards">
+
                 {
                     reviews.slice(range[0], range[1]).map((review, index) => {
 
@@ -72,6 +80,18 @@ export default function Reviews({counsellor}) {
                     e.preventDefault()
                     pagination_controller.nav(1)
                 }}>Next</a>
+
+                {
+                    !postReviewPanel && (
+                        <a href="#post-review" className="review__nav-link review__nav-review"
+                        onClick={() => {
+                            setPostReviewPanel(true)
+                        }}>
+                            Post review
+                        </a>
+                    )
+                }
+
             </div>
 
         </div>

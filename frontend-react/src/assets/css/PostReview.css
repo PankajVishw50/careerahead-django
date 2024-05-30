@@ -1,0 +1,49 @@
+
+.post-review__input-area{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.post-review__label{
+    font-family: 'signika negative';
+}
+
+.post-review__star{
+    cursor: pointer;
+}
+.post-review__star--selected{
+    color: yellow;
+    font-variation-settings: 
+    'FILL' 1;
+}
+
+
+.post-review__controller{
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 10px;
+    gap: 10px;
+}
+.post-review__button{
+    padding: 5px 0;
+    width: 75px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #7ABA78;
+    font-family: 'nunito';
+    border-radius: 5px;
+    cursor: pointer;
+    color: black;
+}
+
+.post-review__cancel{
+    background-color: #e4dcdc;
+}
+
+.post-review__buton:hover{
+    filter:contrast(1.3);
+}

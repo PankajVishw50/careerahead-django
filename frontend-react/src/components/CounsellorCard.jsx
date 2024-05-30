@@ -1,10 +1,13 @@
 import {useOutletContext, Link} from 'react-router-dom'
 
 import '../assets/css/CounsellorCard.css';
+import get_types_string from '../utils/get_types_string';
 
 
 export default function CounsellorCard({counsellor}){
     // const {auth} = useOutletContext()
+
+    const _types = counsellor.type ? counsellor.type.map(el => el.type) : [];
 
     return (
         <div className="couns-card-container">
@@ -23,6 +26,7 @@ export default function CounsellorCard({counsellor}){
                 </div>
                 <div className="couns-info-type">
                     <span>
+                        {get_types_string(_types)}
                     </span>
                 </div>
                 <div className="couns-info-desc">

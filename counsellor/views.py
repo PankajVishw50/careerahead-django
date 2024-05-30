@@ -1,7 +1,8 @@
 from django.shortcuts import render, HttpResponse
-from .models import CounsellorType, Counsellor, Question, Appointment
+from .models import CounsellorType, Counsellor, Question, Appointment, Review
 import json
 from django.template.loader import render_to_string
+from django.contrib.auth.decorators import login_required
 
 from utils.http import make_response
 from utils.helpers import get_page_range
@@ -10,7 +11,7 @@ from utils.decorators import allowed_http_methods
 from utils.serializers import json_serializer
 from utils.http import get_json_from_request
 from utils.email import send_mail
-from utils.datetime import get_datetime_from_str
+from utils.datetime import get_datetime_from_str, get_past_datetime
 
 # Create your views here.
 def get_counsellor_types(req):
@@ -86,8 +87,8 @@ def get_counsellors(req):
         counsellors = counsellors.filter(expected_fee__lte=obj_data['filter'].get('priceUpto'))
 
     # Filter by category
-    # if (obj_data.get('filter') and obj_data['filter'].get('categories') and len(obj_data['filter'].get('categories')) > 0):
-    #     counsellors = counsellors.filter(counsellortype__type__in=obj_data['filter'].get('categories'))
+    if (obj_data.get('filter') and obj_data['filter'].get('categories') and len(obj_data['filter'].get('categories')) > 0):
+        counsellors = counsellors.filter(counsellortype__type__in=obj_data['filter'].get('categories'))
 
 
     print(counsellors.count())
@@ -105,15 +106,23 @@ def get_counsellors(req):
         if (counsellors.count() > size and index >= (counsellors.count()-1)):
             continue
 
-        response_data['data'].append({
+        _data = {
             'username': counsellor.user.username,
             'image': counsellor.user.image,
             'description': counsellor.introduction_section,
             'fee': counsellor.expected_fee,
             'total_clients': 5,
             'email': counsellor.user.email,
-            'id': counsellor.pk
-        })
+            'id': counsellor.pk,
+            'type': []
+        }
+
+        for _type in counsellor.counsellortype_set.all():
+            _data['type'].append({
+                'type': _type.type,
+            })
+
+        response_data['data'].append(_data)
 
     return make_response(
         response, 
@@ -229,7 +238,8 @@ def get_questions(req, id):
     
     range = get_page_range(page, size)
 
-    questions = counsellor.question_set.all().order_by('-answer_time')[range[0]: range[1] + 1]
+    questions = (counsellor.question_set.filter(answer_time__isnull=False)
+                 .order_by('-answer_time')[range[0]: range[1] + 1])
     response_data = {
         'next': questions.count() > size,
         'data': []
@@ -253,6 +263,7 @@ def get_questions(req, id):
 
 
 @allowed_http_methods(['POST'])
+@login_required
 def request_contact(req, id):
 
     response = HttpResponse()
@@ -336,5 +347,150 @@ def request_contact(req, id):
         response,
         {
             'created': True
+        }
+    )
+
+@allowed_http_methods(['POST'])
+def ask_question(req, id):
+
+    # check if counsellor is is valid -> Done
+    # check if user have any other question in last 3 days. -> Done
+    # check if there is question and the max length is 255
+
+    response = HttpResponse()
+    data = get_json_from_request(req)
+
+    if (not data or not data.get('question')):
+        return make_response(
+            response,
+            {
+                'statusCode': 400,
+                'message': 'Please provide an valid json'
+            },
+            400
+        )
+    
+    if len(data.get('question')) > 255:
+        return make_response(
+            response,
+            {
+                'statusCode': 400,
+                'message': 'Question\'s length should not exceed 255 chars'
+            },
+            400
+        )
+    
+    try:
+        counsellor = Counsellor.objects.get(pk=id)
+    except:
+        return make_response(
+            response,
+            {
+                'statusCode': 400,
+                'message': 'Invalid counsellor',
+            },
+            400
+        )
+
+    if (
+        req.user.question_set.filter(counsellor=counsellor)
+        .filter(posting_time__gte=get_past_datetime(60*60*24*3)).count() > 0
+    ):
+        return make_response(
+            response, 
+            {
+                'statusCode': 400,
+                'message': 'You can not ask new question within 3 days of previous question to same counsellor'
+            },
+            400
+        )
+
+    
+    # Create Question
+    question = Question.objects.create(
+        question=data.get('question'),
+        counsellor=counsellor,
+        user=req.user,
+    )
+
+    return make_response(
+        response,
+        {
+            'created': True,
+        }
+    )
+
+@allowed_http_methods(["POST"])
+def post_review(req, id):
+
+    # check if json data is provided with valid values
+    # check if counsellor id is valid
+    # check if user and counsellor not same
+    # check is there is no another review already there 
+
+    response = HttpResponse()
+    data = get_json_from_request(req)
+
+    print(data)
+
+    if (
+        not data or 
+        not data.get('rating') or data.get('rating') < 1 or data.get('rating') > 5 or
+        not data.get('comment') or len(data.get('comment')) < 20 or len(data.get('comment')) > 1024
+    ):
+        return make_response(
+            response, 
+            {
+                'statusCode': 400,
+                'message': 'Provide valid json data',
+            },
+            400
+        )
+    
+
+    try:
+        counsellor = Counsellor.objects.get(pk=id)
+    except:
+        return make_response(
+            response, 
+            {
+                'statusCode': '400',
+                'message': 'Invalid counsellor'
+            },
+            400
+        )
+
+    if req.user == counsellor:
+        return make_response(
+            response, 
+            {
+                'statusCode': '400',
+                'message': 'Counsellor and user both can\' be same',
+            },
+            400
+        )
+    
+
+    if req.user.review_set.filter(counsellor=counsellor).count() > 0:
+        return make_response(
+            response,
+            {
+                'statusCode': 400,
+                'message': 'You have already posted an review on this counsellor'
+            },
+            400
+        )
+    
+    review = Review.objects.create(
+        comment=data.get('comment'),
+        rating=data.get('rating'),
+        user=req.user,
+        counsellor=counsellor,
+    )
+
+    return make_response(
+        response,
+        {
+            'created': True,
         }
     )

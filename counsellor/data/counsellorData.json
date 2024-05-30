@@ -1,0 +1,164 @@
+[
+  {
+    "name": "Emily Jones",
+    "email": "emily.jones@gmail.com",
+    "username": "emily jones",
+    "image": "counsellor_emily_jones.jpg",
+    "age": 42,
+    "fee": 120,
+    "experience": 10,
+    "details": {
+      "introduction": "Hi there, I'm Emily Jones, a counselor specializing in addiction therapy. With 10 years of experience in the field, I have helped many individuals overcome addiction and regain control of their lives.",
+      "qualifications": "I use evidence-based practices such as cognitive-behavioral therapy (CBT) and motivational interviewing to help clients identify the root causes of their addiction and develop healthy coping strategies.",
+      "specialization": "In my work with clients, I create a safe, non-judgmental space where individuals can explore their feelings, beliefs, and behaviors without fear of stigma or shame. I believe that addiction is a disease, not a moral failing, and I work to help my clients understand and internalize this perspective.",
+      "rates": "My rate is $120 per hour. I'm here to support you on your journey towards healing and growth, and I look forward to working with you."
+    },
+    "role_id": 2,
+    "gender_id": 1,
+    "type_of_counsellor": 2
+  },
+  {
+    "name": "Jacob Lee",
+    "email": "jacob.lee@gmail.com",
+    "username": "jacob lee",
+    "image": "counsellor_jacob_lee.jpg",
+    "age": 28,
+    "fee": 80,
+    "experience": 3,
+    "details": {
+      "introduction": "Hello, my name is Jacob Lee and I'm a mental health therapist with 3 years of experience.",
+      "qualifications": "I use a variety of evidence-based practices such as cognitive-behavioral therapy (CBT), dialectical behavior therapy (DBT), and mindfulness-based interventions to help my clients address their specific needs and goals.",
+      "specialization": "I create a warm and empathetic space where individuals can explore their thoughts and feelings without judgment or pressure. I believe that everyone has the capacity for growth and change.",
+      "rates": "My rate is $80 per hour. If you're struggling with mental health challenges or simply want to improve your overall well-being, I'm here to help."
+    },
+    "role_id": 2,
+    "gender_id": 2,
+    "type_of_counsellor": 3
+  },
+  {
+    "name": "Sophia Patel",
+    "email": "sophia.patel@gmail.com",
+    "username": "sophia patel",
+    "image": "counsellor_sophia_patel.jpg",
+    "age": 50,
+    "fee": 150,
+    "experience": 15,
+    "details": {
+      "introduction": "Hello, my name is Sophia Patel and I'm a counselor specializing in mental health therapy with 15 years of experience.",
+      "qualifications": "I use a variety of evidence-based practices such as cognitive-behavioral therapy (CBT), dialectical behavior therapy (DBT), and mindfulness-based interventions to help my clients address their specific needs and goals.",
+      "specialization": "I create a warm and empathetic space where individuals can explore their thoughts and feelings without judgment or pressure. I also have experience working with individuals who have experienced trauma, grief and loss, and relationship issues.",
+      "rates": "My rate is $150 per hour. Let's work together to unlock your full potential and create the life you deserve."
+    },
+    "role_id": 2,
+    "gender_id": 1,
+    "type_of_counsellor": 4
+  },
+  {
+    "name": "Aiden Kim",
+    "email": "aiden.kim@gmail.com",
+    "username": "aiden kim",
+    "image": "counsellor_aiden_kim.jpg",
+    "age": 38,
+    "fee": 110,
+    "experience": 8,
+    "details": {
+      "introduction": "Hello, I'm Aiden Kim, a career counselor with 8 years of experience.",
+      "qualifications": "I work with my clients to identify their unique strengths, skills, and values and help them explore potential career paths that align with their interests and aspirations.",
+      "specialization": "I offer a range of services to help you achieve success, from career assessments and skill-building exercises to job search strategies and interview preparation.",
+      "rates": "My rate is $110 per hour. Let's work together to create a roadmap to your professional success."
+    },
+    "role_id": 2,
+    "gender_id": 1,
+    "type_of_counsellor": 5
+  },
+  {
+    "name": "Samantha Nguyen",
+    "email": "samantha.nguyen@gmail.com",
+    "username": "samantha nguyen",
+    "image": "counsellor_samantha_nguyen.jpg",
+    "age": 31,
+    "fee": 90,
+    "experience": 7,
+    "details": {
+      "introduction": "Hi, my name is Samantha Nguyen and I am a genetic counselor with 7 years of experience.",
+      "qualifications": "I work with individuals who may be at risk for genetic conditions or who have already received a genetic diagnosis. I provide information about the condition, explain how it is inherited, and offer support.",
+      "specialization": "I offer a range of services including genetic testing, risk assessment, and genetic counseling for couples considering starting a family.",
+      "rates": "My rate is $90 per hour. If you are facing a genetic health concern or need support navigating life's challenges, I am here to help."
+    },
+    "role_id": 2,
+    "gender_id": 2,
+    "type_of_counsellor": 5
+  },
+  {
+    "name": "Ashley Kim",
+    "email": "ashley.kim@gmail.com",
+    "username": "ashley kim",
+    "image": "counsellor_ashley_kim.jpg",
+    "age": 26,
+    "fee": 75,
+    "experience": 3,
+    "details": {
+      "introduction": "Hi, my name is Ashley Kim and I am an art therapist.",
+      "qualifications": "I use a variety of art materials and techniques to help my clients explore and express their inner experiences.",
+      "specialization": "I specialize in working with individuals dealing with trauma, anxiety, depression, and other mental health concerns.",
+      "rates": "My rate is $75 per hour. Let's work together to uncover your inner wisdom and strength and find a path forward that is grounded in healing and growth."
+    },
+    "role_id": 2,
+    "gender_id": 1,
+    "type_of_counsellor": 7
+  },
+  {
+    "name": "Daniel Rodriguez",
+    "email": "daniel.rodriguez@gmail.com",
+    "username": "daniel rodriguez",
+    "image": "counsellor_daniel_rodriguez.jpg",
+    "age": 37,
+    "fee": 110,
+    "experience": 8,
+    "details": {
+      "introduction": "Hello, my name is Daniel Rodriguez and I am a psychotherapist with 15 years of experience.",
+      "qualifications": "I offer a variety of therapeutic approaches including cognitive-behavioral therapy, psychodynamic therapy, and mindfulness-based approaches.",
+      "specialization": "I work with individuals dealing with depression, anxiety, trauma, addiction, and other mental health challenges.",
+      "rates": "My rate is $110 per hour. Let's work together to uncover the root causes of your challenges, develop coping strategies, and find greater balance and well-being in your life."
+    },
+    "role_id": 2,
+    "gender_id": 2,
+    "type_of_counsellor": 5
+  },
+  {
+    "name": "Peter Chen",
+    "email": "peter.chen@gmail.com",
+    "username": "peter chen",
+    "image": "counsellor_peter_chen.jpg",
+    "age": 45,
+    "fee": 130,
+    "experience": 20,
+    "details": {
+      "introduction": "Hello, my name is Peter Chen and I am a relationship counselor with 20 years of experience.",
+      "qualifications": "I use a variety of therapeutic approaches including cognitive-behavioral therapy, psychodynamic therapy, and mindfulness-based approaches.",
+      "specialization": "I work with couples and individuals dealing with relationship challenges, communication issues, and other interpersonal problems.",
+      "rates": "My rate is $130 per hour. Let's work together to uncover the root causes of your relationship challenges, develop coping strategies, and find greater balance and well-being in your life."
+    },
+    "role_id": 2,
+    "gender_id": 1,
+    "type_of_counsellor": 6
+  },
+  {
+    "name": "Laura Gonzales",
+    "email": "laura.gonzales@gmail.com",
+    "username": "laura gonzales",
+    "image": "counsellor_laura_gonzales.jpg",
+    "age": 29,
+    "fee": 90,
+    "experience": 4,
+    "details": {
+      "introduction": "Hi, I'm Laura Gonzales, a licensed professional counselor specializing in trauma therapy with 4 years of experience.",
+      "qualifications": "I use a variety of evidence-based practices such as EMDR and trauma-focused cognitive-behavioral therapy to help clients address and process their trauma.",
+      "specialization": "I provide a safe and supportive environment for clients to explore their experiences and work towards healing and recovery.",
+      "rates": "My rate is $90 per hour. If you have experienced trauma and are seeking support, I am here to help."
+    },
+    "role_id": 2,
+    "gender_id": 1,
+    "type_of_counsellor": 5
+  }
+]

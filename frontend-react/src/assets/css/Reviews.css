@@ -22,7 +22,7 @@
 
 .review__nav-link{
     width: 100px;
-    padding: 5px 0;
+    padding: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,3 +42,6 @@
     filter:contrast(.8);
 }
 
+.review__nav-review{
+    margin-left: auto;
+}

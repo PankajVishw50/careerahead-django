@@ -1,0 +1,37 @@
+
+#ask-question{
+    margin-top: 20px;
+}
+
+.ask-question__input{
+    font-size: 20px;
+}
+
+.ask-question__controller-area{
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 25px;
+    gap: 10px;
+}
+
+.ask-question__button{
+    padding: 5px 0;
+    width: 75px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #7ABA78;
+    font-family: 'nunito';
+    border-radius: 5px;
+    cursor: pointer;
+    color: black;
+}
+
+.ask-question__cancel{
+    background-color: #e4dcdc;
+}
+
+.ask-question__buton:hover{
+    filter:contrast(1.3);
+}

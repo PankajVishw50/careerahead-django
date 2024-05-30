@@ -126,7 +126,7 @@ export default function MarketPage(){
                 ...filterData,
                 categories: categories.filter(el => {
                     return el.selected
-                }).map(el => el.id)
+                }).map(el => el.type)
             }
         }
 

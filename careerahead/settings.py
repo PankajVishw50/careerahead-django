@@ -91,10 +91,10 @@ WSGI_APPLICATION = 'careerahead.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'careerahead-django',
-        'HOST': 'ep-wandering-shape-220681.ap-southeast-1.aws.neon.tech',
-        'USER': 'PankajVishw50',
-        'PASSWORD': 'WPBC6swu4yKj',
+        'NAME': 'test_2',
+        'HOST': 'localhost',
+        'USER': 'postgres',
+        'PASSWORD': 'password',
         'PORT': 5432,
     }
 }
