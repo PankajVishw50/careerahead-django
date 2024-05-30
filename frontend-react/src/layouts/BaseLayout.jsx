@@ -5,7 +5,7 @@ import Footer from '../components/Footer'
 
 function BaseLayout() {
     console.log("In the BAse layout")
-    const {auth} = useOutletContext() 
+    const {auth, modal} = useOutletContext() 
 
 
 
@@ -17,6 +17,7 @@ function BaseLayout() {
             <Outlet
             context={{
                 auth,
+                modal,
             }}
             />
 

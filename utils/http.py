@@ -21,3 +21,12 @@ def make_response(
 
     return response
 
+
+def get_json_from_request(req):
+
+    try:
+        data = json.loads(req.body)
+    except:
+        return False 
+    
+    return data

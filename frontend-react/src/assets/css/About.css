@@ -1,0 +1,32 @@
+
+.about{
+    flex: 1;
+    align-self: flex-start;
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.about__section{
+    border-bottom: 1px dotted gray;
+    padding: 5px 0 30px 0;
+}
+.about__section:last-child{
+    border-bottom: none;
+}
+
+.about__header{
+    margin-bottom: 10px;
+    font-family: "Signika Negative", sans-serif;
+    font-size: 10px;
+    display: flex;
+    gap: 5px;
+}
+
+.about__logo{
+    color: #18354c;
+}
+
+.about__paragraph{
+    font-family: 'nunito';
+}

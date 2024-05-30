@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import '../assets/css/SetupPage.css'
 
 export default function SetupPage(){
-    const {auth} = useOutletContext()
+    const {auth, modal} = useOutletContext()
     const [uuid, setUUID] = useState(Array(4).fill(null))
     const [activeAvatar, setActiveAvatar] = useState(null)
     const navigate = useNavigate()
@@ -54,7 +54,10 @@ export default function SetupPage(){
 
     async function save_profile(){
         if (!activeAvatar){
-            return alert("please select an avatar first")
+            return modal.toast(
+                'please select an avatar first',
+                'info',
+            )
         }
 
         const selected_categories = categories.filter(value => {
@@ -62,7 +65,10 @@ export default function SetupPage(){
         }).map(value => value.id)
 
         if (selected_categories.length < 3){
-            return alert('please select 3 or more interested categories')
+            return modal.toast(
+                'please select 3 or more interested categories',
+                'info'
+            )
         }
 
         const data = {
@@ -85,12 +91,19 @@ export default function SetupPage(){
         }catch{}
 
         if (response.status !== 200){
-            return alert('something went wrong, try again')
+            return modal.toast(
+                'Something went wrong, try again later',
+                'error'
+            )
         }
 
         if (json && json.updated){
-            auth.load_login(json.data)
-            return navigate('/profile') 
+            auth.load_login(json)
+            modal.toast(
+                'Profile setted up',
+                'success',
+            )
+            return navigate('/dashboard') 
         }
 
 

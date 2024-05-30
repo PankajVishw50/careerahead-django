@@ -1,12 +1,25 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Outlet, useLoaderData } from 'react-router-dom';
 import Auth from './utils/Auth';
+import ModalComponent from './components/ModalComponent';
+import Modal from './utils/Modal';
 
 function App() {
 	const data = useLoaderData()
-	const [auth, setAuth] = useState()
+	const [auth, setAuth] = useState();
+	const [, forceUpdate] = useState(0);
 
-	console.log("IN the App")
+	const modalClass = useRef(
+		new Modal(forceUpdate)
+	)
+
+	console.log('in the App.jsx')
+
+	const modal = modalClass.current
+
+	useEffect(() => {
+		modal.check_location_toasts();
+	}, [])
 
 	useEffect(() => {
 		(async () => {
@@ -17,11 +30,21 @@ function App() {
 	}, [])
 
 	return (
-		<Outlet
-		context={{
-			auth,
-		}}
-		/>
+		<>
+		
+			<Outlet
+			context={{
+				auth,
+				modal,
+			}}
+			/>
+
+			<ModalComponent 
+			modal={modal}
+			/>
+		
+		</>
+
 	)
 }	
 

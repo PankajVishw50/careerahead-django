@@ -15,6 +15,7 @@ import CounsellorDashboard from './routes/CounsellorDashboard';
 import MarketPage from './routes/MarketPage';
 import CounsellorProfileView from './components/CounsellorProfileView';
 import CounsellorPost from './routes/CounsellorPost';
+import Dashboard from './routes/Dashboard';
 
 const router = createBrowserRouter([
     {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
                             {
                                 path: 'email/verification',
                                 element: <EmailVerificationPage/>,
+                            },
+                            {
+                                path: '/dashboard',
+                                element: <Dashboard/>,
                             },
                             {
                                 path: '/user/dashboard',

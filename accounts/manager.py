@@ -28,7 +28,10 @@ class CustomUserManager(BaseUserManager):
     
     def create_superuser(self, email, username, password, **kwargs):
         kwargs.setdefault('is_superuser', True)
+        kwargs.setdefault('is_staff', True)
+        kwargs.setdefault('is_setup', True)
         kwargs.setdefault('verified', True)
+        kwargs.setdefault('image', 'static/images/user/counsellor_default.png')
 
         return self.create_user(email, username, password, **kwargs)
         

@@ -6,8 +6,9 @@ from utils.validators import IntegerRangeValidator
 
 # Create your models here.
 class CustomUserModel(AbstractUser):
+
     email = models.EmailField(
-        primary_key=True
+        unique=True
     )
 
     username = models.CharField(
@@ -18,13 +19,18 @@ class CustomUserModel(AbstractUser):
         default=False
     )
 
-    setup = models.BooleanField(
+    is_setup = models.BooleanField(
         default=False
+    )
+
+    interested_categories = models.JSONField(
+        blank=True,
+        null=True,
     )
 
     image = models.URLField(
         null=True,
-        blank=True
+        blank=True,
     )
 
     gender = models.CharField(
@@ -32,6 +38,7 @@ class CustomUserModel(AbstractUser):
         choices=[
             ('male', 'male'),
             ('female', 'female'),
+            ('other', 'other'),
         ],
         null=True,
         blank=True
@@ -44,7 +51,7 @@ class CustomUserModel(AbstractUser):
 
     
     def __str__(self) -> str:
-        return self.email
+        return f"{self.email} -> {'superuser' if self.is_superuser else ('counsellor' if self.is_counsellor else 'user')}"
     
 
 class EmailVerification(models.Model):
@@ -64,6 +71,9 @@ class EmailVerification(models.Model):
     )
 
     expiry_date = models.DateTimeField()    
+
+    def __str__(self) -> str:
+        return self.user.username
 
 
 class Session(models.Model):

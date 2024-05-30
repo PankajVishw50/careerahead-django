@@ -9,12 +9,16 @@ import uuid
 import requests
 from django.conf import settings
 import os 
+from django.template.loader import render_to_string
 
 from utils.http import make_response
-from accounts.models import CustomUserModel
+from accounts.models import CustomUserModel, EmailVerification
 from counsellor.models import CounsellorType
 from careerahead.configs import MULTIAVATAR_URL, MULTIAVATAR_API_KEY
 from utils.user import get_me_serialized
+from utils.email import send_mail
+from utils.datetime import get_future_datetime
+from careerahead.configs import EMAIL_VERIFICATION_EXPIRY_VALIDITY
 
 from utils.decorators import allowed_http_methods
 
@@ -158,23 +162,23 @@ def email_verification(req):
 
     # if already verified
     if (req.user.emailverification.verified):
-        return redirect(f"/email/verification?msg=Your email is already verified")
+        return redirect(f"/user/dashboard?toast=Your email is already verified&type=info")
 
 
     # if invalid uuid
     if req.user.emailverification.uuid.hex != uuid:
-        return redirect(f"/email/verification?msg=invalid code")
+        return redirect(f"/user/dashboard?toast=invalid code&type=error")
 
     # if expired
     if now > req.user.emailverification.expiry_date:
-        return redirect(f"/email/verification?msg=verification code expired, please regenerate the email verification code")
+        return redirect(f"/user/dashboard?toast=verification code expired, please regenerate the email verification code&type=error")
 
 
     # Verify now 
     req.user.emailverification.verified = True
     req.user.emailverification.save()
 
-    return redirect(f"/email/verification?msg=successfully verified your email")
+    return redirect(f"/user/dashboard?toast=successfully verified your email&type=success")
 
 @allowed_http_methods(['POST'])
 def setup_view(req):
@@ -225,32 +229,49 @@ def setup_view(req):
         file.write(image_response.text)
 
     user.image = rel_file_path
-    user.setup = True
+    user.is_setup = True
     types_db = CounsellorType.objects.filter(pk__in=types)
     user.counsellortype_set.add(*types_db)
     user.save()
 
-        # Preparing data to send
-    response_data = {
-        'updated': True,
-        'data': {
-            'email': user.email,
-            'username': user.username,
-            'is_counsellor': user.is_counsellor,
-            'setup': user.setup,
-            'email_meta': None,
-        }
-    }
-
-    if hasattr(user, 'emailverification'):
-        response_data['data']['email_meta'] = {
-            'verified': user.emailverification.verified,
-            'expiry_date': user.emailverification.expiry_date.isoformat(),
-        }
-
     return make_response(
         response, 
-        response_data,
+        {
+            'updated': True,
+            **get_me_serialized(user),
+        },
     )
 
 
+def resend_email(req):
+
+    response = HttpResponse()
+
+        
+    if hasattr(req.user, 'emailverification'):
+        req.user.emailverification.delete()
+
+    email = EmailVerification(
+        user=req.user,
+        expiry_date=get_future_datetime(EMAIL_VERIFICATION_EXPIRY_VALIDITY)
+    )
+    email.save()
+
+    html = render_to_string('email-verification-mail.html', {
+            'username': req.user.username,
+            'uuid': email.uuid.hex,
+    })
+
+    send_mail(
+        [req.user.email],
+        'Verify Email',
+        html,
+        html
+        )
+
+    return make_response(
+        response,
+        {
+            'created': True
+        }
+    )

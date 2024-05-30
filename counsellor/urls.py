@@ -1,9 +1,16 @@
 from django.urls import path
 
-from .views import get_counsellor_types, get_counsellors, get_counsellor
+from .views import (
+    get_counsellor_types, get_counsellors,
+    get_counsellor, get_reviews,
+    get_questions, request_contact
+    )
 
 urlpatterns = [
     path('types', get_counsellor_types, name='get_counsellor_types'),
     path('counsellors', get_counsellors, name='get_counsellors'),
-    path('counsellor/<str:id>', get_counsellor, name='get_counsellor'),
+    path('<str:id>', get_counsellor, name='get_counsellor'),
+    path('<int:id>/reviews', get_reviews, name='get_reviews'),
+    path('<int:id>/questions', get_questions, name='get_questions'),
+    path('<int:id>/appoint', request_contact, name='appoint_contact'),
 ]

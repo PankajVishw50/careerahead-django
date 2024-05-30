@@ -67,7 +67,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR / 'frontend-react/build'
+            BASE_DIR / 'frontend-react/build',
+            BASE_DIR / 'templates',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -149,9 +150,15 @@ AUTH_USER_MODEL = 'accounts.CustomUserModel'
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
 ]
-
+ALLOWED_HOSTS = ['*']
 
 USE_TZ = False
 
 MEDIA_URL = '/media/'
 MEDIA_PATH = os.path.join(BASE_DIR, 'media')
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.environ.get('email_username')
+EMAIL_HOST_PASSWORD = os.environ.get('email_password')
+EMAIL_USE_TLS = True

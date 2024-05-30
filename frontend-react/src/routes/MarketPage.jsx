@@ -197,7 +197,7 @@ export default function MarketPage(){
                     <div className="filter-container">
                         <h5>Select types: </h5>
                         <div className="filter-names">
-                                {categories.slice(0, expandCategory ? categories.length : 8).map((category, index) => {
+                                {categories.length > 0 && categories.slice(0, expandCategory ? categories.length : 8).map((category, index) => {
                                     return (
                                         <div className="type-container" key={index}>
                                             <button

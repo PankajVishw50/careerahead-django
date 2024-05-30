@@ -4,15 +4,20 @@ import { useEffect, useState } from "react";
 
 import '../assets/css/counsellor-profile.css'
 import '../assets/css/post.css'
+import About from "../components/About";
+import Reviews from "../components/Reviews";
+import Appoint from "../components/Appoint";
+import QuestionSection from "../components/QuestionSection";
 
 export default function CounsellorPost(){
     let {counsellorId} = useParams();
-
     const [counsellor, setCounsellor] = useState({})
+    const [view, setView] = useState('About')
+
 
     useEffect(() => {
         (async() => {
-            const response = await fetch('/api/counsellor/counsellor/' + counsellorId)
+            const response = await fetch('/api/counsellor/' + counsellorId)
             let json = {}
 
             try{
@@ -28,6 +33,10 @@ export default function CounsellorPost(){
         })()
     }, [])
 
+    function select_badge({currentTarget}){
+        setView(currentTarget.getAttribute('name'))
+    }
+
     return (
         <div className="profile-container">
             {
@@ -37,29 +46,56 @@ export default function CounsellorPost(){
 
             }
 
-            <div className="post-container">
-                <div className="post-headers">
-                    <h3>Post</h3>
+
+            <div className="right-wrapper">
+
+                <div className="views-wrapper">
+
+                    <div className="views">
+
+
+                        {
+                            ['About', 'Q&A', 'Reviews', 'Appoint'].map((value, index) => {
+                                return (
+                                    <div className={
+                                        'views__badge ' + (value === view ? 
+                                        'views__badge--selected' :
+                                        '')
+                                    }
+                                    key={index}
+                                    onClick={select_badge}
+                                    name={value}>
+                                        <span className="views__badge-name">
+                                            {value}
+                                        </span>
+                                    </div>
+                                )
+                            })
+                        }
+
+                    </div>
+
                 </div>
-                <hr />
-                <div className="post-description">
-                    <p>
-                        {counsellor && counsellor.description}
-                    </p>
+
+                <div className="info-wrap">
+
+                    {
+                        [
+                            ['About', <About counsellor={counsellor}/>], 
+                            ['Q&A', <QuestionSection counsellor={counsellor}/>],
+                            ['Reviews', <Reviews counsellor={counsellor}/>], 
+                            ['Appoint', <Appoint counsellor={counsellor}/>]
+                        ]
+                        .find(el => el[0] === view)[1]
+                    }
+
                 </div>
-                <div className="price">
-                    <span className="material-symbols-outlined vector" style={{flex: 'none', width: 'auto'}}>paid</span>
-                    <p>
-                        {counsellor ? counsellor.fee : ''}
-                    </p>
-                    <span className="placeholder">
-                    (This amount will be charged from your account)
-                    </span>
-                </div>
-                <div className="action-links">
-                    <button className="btn1 book-btn">Book Session</button>
-                </div>
+
+
+
             </div>
+
+
         </div>
     )
 

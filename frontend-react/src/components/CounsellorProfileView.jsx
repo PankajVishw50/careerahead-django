@@ -2,6 +2,9 @@
 import '../assets/css/profile.css'
 
 function CounsellorProfileView({counsellor}) {
+  console.log('counsellor from profile view: ', counsellor)
+  const image_path = counsellor && counsellor.image ? counsellor.image.replace(/\\/g, '/') : null;
+
   return (
 <div className="profile-viewer-container">
   <div className="profile-main-image">
@@ -9,7 +12,7 @@ function CounsellorProfileView({counsellor}) {
       className="profile-image"
       style={
         {
-            backgroundImage: 'url(/' +  counsellor.image + ')'
+            backgroundImage: 'url(/' + image_path + ')'
         }
       }
     />

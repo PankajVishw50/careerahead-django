@@ -1,7 +1,7 @@
 import { Link, useLocation, useOutletContext } from "react-router-dom";
 
 export default function EmailVerificationPage(){
-    const {auth} = useOutletContext()
+    const {auth, modal} = useOutletContext()
     const query = new URLSearchParams(useLocation().search)
 
 
@@ -31,15 +31,31 @@ export default function EmailVerificationPage(){
             </p>
 
             <ul className="email-verification__navs">
-                {
-                    (auth && auth.data) && (!auth.data.email_meta || (
-                        (!auth.data.email_meta.verified) && 
-                        ((new Date(auth.data.email_meta.expiry_date)) > (new Date()))
-                    )) ? 
-                    <Link className="email-verification__nav-link" to='/welcome'>Resend Email</Link>
-                    :
-                    null
-                }
+                <a href="/" className="email-verification__nav-link"
+                onClick={async (e) => {
+                    e.preventDefault();
+
+                    const response = await fetch('/auth/email/send')
+                    let json = {}
+
+                    try{
+                        json = await response.json()
+                    }catch{}
+
+                    if (response.status !== 200 || !json || !json.created){
+                        return modal.toast(
+                            'Failed to resend mail. Try again',
+                            'error'
+                        )   
+                    }
+
+                    return modal.toast(
+                        'Successfully sended mail. Check your inbox and click on provided link to verify your email',
+                        'success',
+                    )   
+                }}>
+                    Resend Email
+                </a>
             </ul>
 
         </div>

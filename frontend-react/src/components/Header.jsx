@@ -15,32 +15,26 @@ function Header() {
 			</div>
 			<ul className="navigation">
 				<li>
-					<Link to="/welcome">welcome</Link>
-				</li>
-				<li>
-					<Link to="/user/dashboard">user Dashboard</Link>
-				</li>
-				<li>
-					<Link to="/counsellor/dashboard">counsellor Dashboard</Link>
-				</li>
-
-				<li>
-					<Link to='/email/verification'>Email Verification</Link>
-				</li>
-				<li>
-					<Link to='/setup'>Setup</Link>
-				</li>
-				<li>
-					<Link to="/login">Login</Link>
-				</li>
-				<li>
-					<Link to="/signin">SignIn</Link>
+					<Link to='/welcome'>Welcome</Link>
 				</li>
 				{
-					auth && auth.is_authenticated() && 
+					auth && auth.is_authenticated() ?
+					(
+						<>
+							<li>
+								<Link to='/dashboard'>Dashboard</Link>
+							</li>
+							<li>
+								<Link to='/market'>Book</Link>
+							</li>
+							<li>
+							<Link to="/logout">Logout</Link>
+							</li>
+						</>
+					) : 
 					(
 						<li>
-						<Link to="/logout">Logout</Link>
+							<Link to='/login'>Login</Link>
 						</li>
 					)
 				}

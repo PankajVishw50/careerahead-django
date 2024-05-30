@@ -1,0 +1,133 @@
+.modal--dead{
+    display: none !important;
+}
+
+.modal{
+}
+.modal__blocker{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: white; */
+    backdrop-filter: blur(1px);
+    z-index: 999;
+}
+.modal__blocker-wrapper{
+    width: 500px;
+    background-color: white;
+    aspect-ratio: 2 /1;
+    box-shadow: 2px 2px 10px gray;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal__toast{
+    position: fixed;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    max-width: 90%;
+    width: fit-content;
+    min-width: 600px;
+    aspect-ratio: 10 / 1;
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 10px; 
+    box-shadow: 2px 2px 5px gray;
+}
+
+.modal__toast-text{
+    flex: 1;
+    font-family: 'rubik';
+    font-size: 14px;
+}
+
+.modal__toast-logo{
+    margin-right: 5px;
+}
+
+.modal__blocker__header-close,
+.modal__toast-cancel{
+    color: red;
+    cursor: pointer;
+    transition: .2s transform;
+}
+
+.modal__blocker__header-close:hover,
+.modal__toast-cancel:hover{
+    animation: shakeOf .5s ease;
+}
+
+@keyframes shakeOf {
+    33%{
+        transform: rotateZ(20deg) 
+    }
+
+    66%{
+        transform: rotateZ(-20deg)
+    }
+    
+}
+
+
+
+.modal__blocker__header{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    align-items: center;
+    background-color: #F6EEC9;
+}
+.modal__blocker__header-text{
+    font-size: 24px;
+    font-family: 'raleway';
+}
+
+.modal__blocker__content{
+    display: flex;
+    padding: 10px;
+    gap: 10px;
+    align-items: flex-start;
+    flex: 1;
+}
+
+.modal__blocker-logo{
+    font-size: 20px;
+}
+.modal__blocker-text{
+    font-family: 'rubik';
+    font-size: 15px;
+}
+
+.modal__blocker__controller{
+    min-height: 50px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 10px;
+}
+
+.modal__blocker__button{
+    padding: 5px 10px;
+    color: black;
+    font-family: rubik;
+    font-size: 15px;
+}
+.modal__blocker__button:hover{
+    filter: contrast(1.4);
+}
+.modal__blocker__button:active{
+    filter: contrast(.8);
+}

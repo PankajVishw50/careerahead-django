@@ -28,7 +28,7 @@ export default function CounsellorCard({counsellor}){
                 <div className="couns-info-desc">
                     <p>
                     {
-                        counsellor.description.slice(0, 180)
+                        counsellor.description && counsellor.description.slice(0, 180)
                     }
                      <span>.....MORE</span>
                     </p> 

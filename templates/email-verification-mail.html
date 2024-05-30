@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Mail</title>
+</head>
+<body>
+
+    <h1>
+        Hello {{ username }}, Please verify your email.
+    </h1>
+
+    <a href="http://localhost:8000/auth/email/verify?q={{ uuid }}">Verify</a>
+    
+</body>
+</html>

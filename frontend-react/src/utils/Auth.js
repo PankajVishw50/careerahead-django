@@ -13,6 +13,7 @@ export default class Auth{
 
     }
 
+
     async check_validation(){
 
         console.log('making response');
@@ -36,6 +37,9 @@ export default class Auth{
     is_authenticated(){
         return this._is_authenticated;
     }
+    
+    
+
 
     is_counsellor(){
         return (this.is_authenticated && this.data && this.data.get('is_counsellor'))

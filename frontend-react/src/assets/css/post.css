@@ -1,36 +1,45 @@
 
-.post-main-container{
-    border: 1px solid green;
-}
-
-.post-headers{
-    margin-bottom: 25px;
-}
-.post-headers h3{
-    font-family: "Josefin Sans", sans-serif;
-}
-
-.post-description{
-    padding: 10px 5px;
-    font-family: var(--text-small-straight);
-}
-
-.price{
-    margin: 10px;
+.right-wrapper{
     display: flex;
-    align-items: center;
-}
-.price .vector{
-    color: green;
-}
-.price p{
-    font-family: "Times New Roman", sans-serif;
-}
-.price .placeholder{
-    margin: 0 10px;
-    color: gray;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.action-links > button{
+.views{
+    display: flex;
+    gap: 15px;
     padding: 10px 10px;
+    font-family: "raleway", sans-serif;
+
+}
+
+.views__badge{
+    padding: 10px 20px;
+    /* border: 1px solid #9de7f2; */
+    background-color: #cce3fd;
+    border-radius: 25px;
+    width: 100px;
+    text-align: center;
+    font-size: 15px;
+}
+.views__badge:hover{
+    background-color: #b1d6ff;
+}
+
+.views__badge--selected{
+    background-color: #e6e8e9;
+    border: none;
+}
+.views__badge--selected:hover{
+    background-color: rgba(240, 240, 240);
+
+}
+
+.views__badge-name{
+    cursor: pointer;
+}
+
+.info-wrap{
+    display: flex;
+    flex-direction: column;
 }

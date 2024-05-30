@@ -1,0 +1,44 @@
+
+.review__cards{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    padding: 10px;
+    justify-content: start;
+}
+
+.review__cards:last-child{
+    justify-self: start;
+}
+
+/* nav */
+.review__nav{
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.review__nav-link{
+    width: 100px;
+    padding: 5px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #7ABA78;
+    /* color: white; */
+    font-family: 'nunito';
+    border-radius: 5px;
+    cursor: pointer;
+    color: black;
+}
+
+.review__nav-link:hover{
+    filter:contrast(1.3);
+}
+
+.review__nav-link:active{
+    filter:contrast(.8);
+}
+

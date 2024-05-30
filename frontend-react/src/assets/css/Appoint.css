@@ -1,0 +1,133 @@
+
+.appointment{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.appointment__header{
+    font-family: "Signika Negative", sans-serif;
+    font-size: 12px;
+}
+
+.appointment__tips{
+    max-width: 500px;
+    background-color: rgba(205, 205, 205, .4);
+    display: flex;
+    gap: 5px;
+    padding: 20px 10px;
+}
+
+.appointment__tips__logo span{
+    font-size: 20px;
+}
+
+.appointment__tips__text-el{
+    font-family: 'poppins', sans-serif;
+    font-size: 13px;
+    /* color: #cdcdcd; */
+    line-height: 1.4;
+    
+}
+
+.appointment__form{
+    /* min-width: 500px; */
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    width: 100%
+}
+
+.form__element{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 25px;
+}
+
+.form__label-area{
+    font-family: 'nunito', sans-serif;
+}
+
+
+.form__input-area{
+    /* margin-top: 2lh; */
+}
+
+textarea{
+    padding: 5px 10px;
+    resize: none;
+    width: 100%;
+}
+
+input, textarea{
+    border: 2px solid #dbdfea;
+}
+
+.form__input__container{
+    display: flex;
+    gap: 50px;
+}
+
+.form__input__date{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.form__input__date-input input{
+    height: 30px;
+    padding: 0 5px;
+}
+
+.form__input__date-label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    background-color: #1ee0ac;
+    color: white;
+    font-family: 'roboto';
+    font-size: 14px;
+}
+
+.form__action{
+    display: flex;
+    width: 100%;
+    gap: 10px;
+}
+
+.form__save{
+    background-color: #6576ff;
+    width: 120px;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 18px;
+}
+.form__save:hover{
+    background-color: #6c79d6;
+
+}
+
+.form__charge{
+    display: flex;
+    align-items: center;
+}
+
+.form__charge-logo{
+    /* font-size: 20px; */
+    color: #A1DD70;
+}
+
+.form__charge-amount{
+    font-family: 'nunito';
+}
+
+.form__charge-tip{
+    color: #888080;
+    margin-left: 5px;
+}

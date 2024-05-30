@@ -3,7 +3,7 @@
 .profile-container{
     flex: 1;
     display: grid;
-    min-height: 100vh;
+    min-height: fit-content;
     grid-template-columns: .3fr .7fr;
     grid-column-gap: 10px;
     padding: 10px;
@@ -15,8 +15,9 @@
     border-radius: 4px;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: .3fr .8fr;
-    padding: 10px 0;
+    grid-template-rows: 200px .8fr;
+    padding: 10px 0 20px 0;
+    height: fit-content;
 }
 .profile-main-image{
     display: flex;
