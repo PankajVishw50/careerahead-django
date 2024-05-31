@@ -4,7 +4,8 @@ from .views import (
     get_counsellor_types, get_counsellors,
     get_counsellor, get_reviews,
     get_questions, request_contact,
-    ask_question, post_review
+    ask_question, post_review,
+    delete_question, update_answer
     )
 
 urlpatterns = [
@@ -16,4 +17,6 @@ urlpatterns = [
     path('<int:id>/appoint', request_contact, name='appoint_contact'),
     path('<int:id>/ask', ask_question, name='ask'),
     path('<int:id>/review', post_review, name='post_review'),
+    path('question/<int:id>/delete', delete_question, name='delete_question'),
+    path('question/<int:id>/answer', update_answer, name='answer_question'),
 ]

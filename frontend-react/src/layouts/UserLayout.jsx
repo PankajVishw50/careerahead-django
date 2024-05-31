@@ -4,7 +4,7 @@ import Auth from '../utils/Auth'
 import Location from '../utils/Location'
 
 function UserLayout(props) {
-    const {auth, modal} = useOutletContext() 
+    const {auth, modal, forceUpdate} = useOutletContext() 
     const navigate = useNavigate()
     const location = useLocation()
 
@@ -43,7 +43,8 @@ function UserLayout(props) {
         <Outlet
         context={{
             auth,
-            modal
+            modal,
+            forceUpdate,
         }}
         /> :
         <></>

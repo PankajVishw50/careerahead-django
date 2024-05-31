@@ -238,7 +238,7 @@ def get_questions(req, id):
     
     range = get_page_range(page, size)
 
-    questions = (counsellor.question_set.filter(answer_time__isnull=False)
+    questions = (counsellor.question_set.all()
                  .order_by('-answer_time')[range[0]: range[1] + 1])
     response_data = {
         'next': questions.count() > size,
@@ -253,6 +253,12 @@ def get_questions(req, id):
             **get_serialized_model(question)['fields'],
             'user': {
                 **get_serialized_model(question.user, ['username', 'image'])['fields']
+            }, 
+            'counsellor': {
+                **get_serialized_model(question.counsellor)['fields'],
+                'user': {
+                    **get_serialized_model(question.counsellor.user, ['username', 'image'])['fields']
+                }
             }
         })
 
@@ -394,13 +400,13 @@ def ask_question(req, id):
 
     if (
         req.user.question_set.filter(counsellor=counsellor)
-        .filter(posting_time__gte=get_past_datetime(60*60*24*3)).count() > 0
+        .filter(posting_time__gte=get_past_datetime(60*60*24*3)).count() > 3
     ):
         return make_response(
             response, 
             {
                 'statusCode': 400,
-                'message': 'You can not ask new question within 3 days of previous question to same counsellor'
+                'message': 'You can not ask more than 3 questions within 3 days to same counsellor'
             },
             400
         )
@@ -492,5 +498,97 @@ def post_review(req, id):
         response,
         {
             'created': True,
+        }
+    )
+
+
+@allowed_http_methods(['DELETE'])
+def delete_question(req, id):
+
+    # if question exist
+    # if question belongs to user 
+    response = HttpResponse()
+
+    try:
+        question = Question.objects.get(pk=id)
+    except:
+        return make_response(
+            response,
+            {
+                'statusCode': 400,
+                'message': 'Invalid question',
+            }
+        )
+    
+    if (
+        not req.user.pk == question.user.pk and 
+        not req.user.pk == question.counsellor.pk
+    ):
+        return make_response(
+            response,
+            {
+                'statusCode': 400,
+                'message': 'Authorization failed',
+            }
+        )
+    
+    question.delete()
+
+    return make_response(
+        response, 
+        {
+            'deleted': True
+        }
+    )
+        
+    
+
+@allowed_http_methods(['POST'])
+def update_answer(req, id):
+
+    response = HttpResponse()
+    data = get_json_from_request(req)
+
+    if (not data or not data.get('answer') or len(data['answer']) < 20 or len(data['answer']) > 1024):
+        return make_response(
+            response,
+            {
+                'statusCode': 400,
+                'message': 'Please provide valid json',
+            }
+        )
+
+    try:
+        question = Question.objects.get(pk=id)
+    except:
+        return make_response(
+            response,
+            {
+                'statusCode': 400,
+                'message': 'invalid question',
+            },
+            400
+        )
+    
+    print(question.counsellor.user)
+    print(req.user)
+    if (question.counsellor != req.user.counsellor):
+        return make_response(
+            response,
+            {
+                'statusCode': 400,
+                'message': 'Only authorized counsellor is allowed to answer the question'
+            },
+            400
+        )
+    
+    question.answer = data['answer']
+    question.answer_time = get_past_datetime(0)
+    question.save()
+
+    return make_response(
+        response,
+        {
+            'updated': True 
         }
     )

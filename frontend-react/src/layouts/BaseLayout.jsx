@@ -5,7 +5,7 @@ import Footer from '../components/Footer'
 
 function BaseLayout() {
     console.log("In the BAse layout")
-    const {auth, modal} = useOutletContext() 
+    const {auth, modal, forceUpdate} = useOutletContext() 
 
 
 
@@ -18,6 +18,7 @@ function BaseLayout() {
             context={{
                 auth,
                 modal,
+                forceUpdate,
             }}
             />
 

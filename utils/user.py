@@ -10,7 +10,8 @@ def get_me_serialized(user):
             'is_counsellor': user.is_counsellor,
             'is_setup': user.is_setup,
             'email_meta': None,
-            'image': user.image
+            'image': user.image,
+            'pk': user.pk
         }
     }
 

@@ -8,6 +8,7 @@ from counsellor.models import CounsellorType
 import math, random
 
 def create_counsellors(apps, schema):
+    return True
     print(settings.BASE_DIR)
     with open(settings.BASE_DIR / 'counsellor/data/counsellorData.json', 'r') as file:
         _raw = file.read()

@@ -21,6 +21,11 @@
 .question__user-logo{
     width: 40px;
 }
+.question__user-img{
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+}
 
 .question__header-text{
     font-family: "Signika Negative", sans-serif;
@@ -72,3 +77,40 @@
     grid-column: 2/4;
 }
 
+.question__answer-reply-text--not-replied{
+    color: red;
+}
+
+.question__controller{
+    display: flex;
+    justify-content: flex-end;
+    grid-column: span 2;
+    padding: 0 10px;
+    gap: 10px;
+}
+
+.question__controller__button{
+    padding: 10px;
+}
+
+.question__controller__button{
+    padding: 5px 0;
+    width: 75px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #7ABA78;
+    font-family: 'nunito';
+    border-radius: 5px;
+    cursor: pointer;
+    color: black;
+}
+
+
+.question__controller__button:hover{
+    filter:contrast(1.3);
+}
+.question__controller__button-delete{
+    background-color: #FFA27F;
+}

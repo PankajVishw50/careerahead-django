@@ -27,6 +27,7 @@ export default function Reviews({counsellor}) {
         }
     }, [counsellor])
 
+
     if (!counsellor.id){
         return <></>
     }

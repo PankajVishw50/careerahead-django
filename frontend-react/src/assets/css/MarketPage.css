@@ -161,11 +161,11 @@
     border-radius: 2px;
 }
 .male-logo{
-    background: rgba(247, 96, 89, .7);
+    background: rgba(88, 134, 245, .6);
     box-shadow: .5px .5px 1px rgba(88, 134, 245, .6);
 }
 .female-logo{
-    background: rgba(88, 134, 245, .6);
+    background: rgba(247, 96, 89, .7);
     box-shadow: .5px .5px 1px rgba(247, 96, 89, .7);
 }
 
