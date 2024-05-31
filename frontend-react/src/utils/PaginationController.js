@@ -24,14 +24,14 @@ export default class PaginationController{
         this.url = url; 
     }
 
-    async fetch_data(page, size){
+    async fetch_data(page, size, data=null){
 
         const response = await fetch(this.url, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
             },
-            body: JSON.stringify({page, size})
+            body: JSON.stringify(data ?? {page, size})
         });
         let json = {}
 
@@ -53,7 +53,7 @@ export default class PaginationController{
         }
     }
 
-    async nav(direction=0){
+    async nav(direction=0, data=null){
         console.log('nav: ', this)
 
         // Same page
@@ -84,7 +84,7 @@ export default class PaginationController{
                 return false;
             }
 
-            const request = await this.fetch_data(this.page+1, this.size)
+            const request = await this.fetch_data(this.page+1, this.size, data)
             
             if (request.failed){
                 return false;

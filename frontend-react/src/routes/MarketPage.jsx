@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import '../assets/css/MarketPage.css';
 import CounsellorCard from '../components/CounsellorCard';
+import PaginationController from '../utils/PaginationController';
 
 export default function MarketPage(){
 
@@ -12,10 +13,33 @@ export default function MarketPage(){
         gender: null,
         priceUpto: 1500,
     });
-    const [page, setPage] = useState(1)
+    const [page, setPage] = useState(0)
     const [size, setSize] = useState(10)
     let next = true
-    const [counsellorData, setCounsellorData] = useState([])
+    const [counsellorData, setCounsellorData] = useState([]);
+    const range = PaginationController.get_range(page, size)
+    
+    const [,forceUpdateController] = useState(false)
+    const [,forceUpdate] = useState(0)
+    const url = '/api/counsellor/counsellors'
+    const [paginationController, setPaginationController] = useState(new PaginationController(url, handle_data, forceUpdate, [page, setPage], [size, setSize]))
+    paginationController.setup(url, [page, setPage], [size, setSize])
+
+    const [data, setData] = useState({
+        page: page,
+        size: size,
+        filter: {
+            ...filterData,
+            categories: categories.filter(el => {
+                return el.selected
+            }).map(el => el.type)
+        }
+    })
+
+
+
+    console.log(paginationController)
+
 
     function handle_filter_change({target}){
 
@@ -33,6 +57,23 @@ export default function MarketPage(){
     function toggle_category_container(){
         setsExpandCategory(prevData => !prevData)
     }
+
+    useEffect(() => {
+        console.log('going to set new pagination controller')
+        if (!forceUpdateController){
+            return;
+        }
+        setPaginationController(
+            (new PaginationController('/api/counsellor/counsellors', handle_data, forceUpdate, [page, setPage], [size, setSize]))
+        )
+    }, [forceUpdateController])
+
+    useEffect(() => {
+        console.log('this one effect ran')
+        if (paginationController){
+            paginationController.nav(1);
+        }
+    }, [paginationController])
 
     useEffect(() => {
         
@@ -66,9 +107,25 @@ export default function MarketPage(){
 
     }, [])
 
-    useEffect(() => {
-        nav(0)
-    }, [])
+    function handle_data({json}){
+        setCounsellorData(prevData => {
+            
+            const data = prevData.map(val => val)
+            json.data.forEach(val => {
+                data.push(val)
+            })
+
+            if (paginationController){
+                paginationController.update_data(data)
+            }
+
+            return data
+        })
+    }
+
+    // useEffect(() => {
+    //     nav(0)
+    // }, [])
 
 
     function reset(){
@@ -162,6 +219,10 @@ export default function MarketPage(){
 
     console.log('counsellor data: ', counsellorData);
 
+
+    if (!paginationController){
+        return <></>
+    }
 
     return (
         <div className="market-container">
@@ -257,8 +318,17 @@ export default function MarketPage(){
                     <div className="filter-button">
                         <button className="btn1" id="filter-submit"
                         onClick={() => {
-                            reset()
-                            fetch_counsellors()
+                            setFilterData({
+                                    page: page,
+                                    size: size,
+                                    filter: {
+                                        ...filterData,
+                                        categories: categories.filter(el => {
+                                            return el.selected
+                                        }).map(el => el.type)
+                                    }
+                                })
+                            forceUpdateController(true)
                         }}>
                         Filter
                         </button>
@@ -274,7 +344,7 @@ export default function MarketPage(){
                 </div>
                 <div className="counsellor-container">
                     {
-                        counsellorData.map((counsellor, index) => {
+                        counsellorData.slice(range[0], range[1]).map((counsellor, index) => {
                                 return (
                                         <CounsellorCard
                                         key={index}
@@ -287,7 +357,17 @@ export default function MarketPage(){
                 <div className="market-navigation">
                     <div className="navigation-sector">
                         <div className="btn-nav previous">
-                            <button className="material-symbols-outlined nav-previous-btn">
+                            <button className="material-symbols-outlined nav-previous-btn"
+                            onClick={(e) => {
+                                e.preventDefault()
+                                paginationController.nav(-1, setFilterData(prevData => {
+                                    return {
+                                        ...prevData,
+                                        page: page,
+                                        size: size
+                                    }
+                                }))
+                            }}>
                             arrow_back
                             </button>
                         </div>
@@ -301,7 +381,17 @@ export default function MarketPage(){
                                 />
                         </div>
                         <div className="btn-nav next">
-                            <button className="material-symbols-outlined nav-next-btn">
+                            <button className="material-symbols-outlined nav-next-btn"
+                            onClick={(e) => {
+                                e.preventDefault()
+                                paginationController.nav(1, setFilterData(prevData => {
+                                    return {
+                                        ...prevData,
+                                        page: page,
+                                        size: size
+                                    }
+                                }))
+                            }}>
                             arrow_forward
                             </button>
                         </div>
