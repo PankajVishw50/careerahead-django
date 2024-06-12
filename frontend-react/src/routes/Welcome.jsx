@@ -19,11 +19,11 @@ function Welcome() {
                         and guidance you need to move forward in life.
                     </p>
                     <div className="take-to-form-container">
-                        <button>
+                        {/* <button>
                         {" "}
                         <span className="text">Find out with our Form </span>{" "}
                         <span className="material-symbols-outlined arrow">trending_flat</span>{" "}
-                        </button>
+                        </button> */}
                     </div>
                 </div>
                 <div className="vector">

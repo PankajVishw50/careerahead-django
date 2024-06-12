@@ -44,8 +44,8 @@ export default function AskQuestion({counsellor_id, askPanel}) {
             'You will be notified once counsellor reply to your question',
             'success',
         )
-
         askPanel(false)
+        window.location.reload()
         return;
 
 

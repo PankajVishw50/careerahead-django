@@ -26,12 +26,18 @@ export default class PaginationController{
 
     async fetch_data(page, size, data=null){
 
+        let _data = data
+
+        if (!_data){
+            _data = {page, size}
+        }
+
         const response = await fetch(this.url, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
             },
-            body: JSON.stringify(data ?? {page, size})
+            body: JSON.stringify(_data)
         });
         let json = {}
 

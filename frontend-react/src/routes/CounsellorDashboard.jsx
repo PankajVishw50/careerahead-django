@@ -14,18 +14,19 @@ export default function CounsellorDashboard(){
                 <div className="panel-container">
                     <AccountWindow
                     auth={auth}
-                    link={'/welcome'}
+                    link={`/counsellor/${auth.data.pk}`}
                     />
 
                     <button className="btn-blue-1">
                         <Link to='/market'>Explore Counsellors</Link>
                     </button>
+
                 </div>
             </div>
             
             <div className="dash-main-row-center">
                 <Counter
-                value={42}
+                value={0}
                 description="This This is clients counter. It shows how many clients you have served
                 till using this website session count.It shows your progress as human being.
                 To grow and understand yourself better explore other counsellors"

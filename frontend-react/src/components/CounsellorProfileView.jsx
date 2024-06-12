@@ -31,34 +31,34 @@ function CounsellorProfileView({counsellor}) {
       </span>{" "}
       <span className="label">Username</span>
     </div>
-    <div className="profile-data">
+    {/* <div className="profile-data">
       <span className="data">
         <span>
             {counsellor.age}
         </span>
       </span>{" "}
       <span className="label">Age</span>
-    </div>
-    <div className="profile-data">
+    </div> */}
+    {/* <div className="profile-data">
       <span className="data">
         <span>
             {counsellor.balance}
         </span>
       </span>{" "}
       <span className="label">Balance</span>
-    </div>
-    <div className="profile-data">
+    </div> */}
+    {/* <div className="profile-data">
       <span className="data">
         <span id="mail">
             {counsellor.email}
         </span>
       </span>{" "}
       <span className="label">Mail Address</span>
-    </div>
+    </div> */}
     <div className="profile-data">
       <span className="data">
         <span>
-            {counsellor.fee}
+            {counsellor.expected_fee}$
         </span>
       </span>{" "}
       <span className="label">Fee</span>
@@ -74,7 +74,7 @@ function CounsellorProfileView({counsellor}) {
     <div className="profile-data">
       <span className="data">
         <span>
-            counsellor.gender
+            {counsellor.gender}
         </span>
       </span>{" "}
       <span className="label">Gender</span>

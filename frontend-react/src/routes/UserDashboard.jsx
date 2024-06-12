@@ -16,6 +16,7 @@ export default function UserDashboardPage(){
                     <AccountWindow
                     auth={auth}
                     link={'/welcome'}
+                    hide_button={true}
                     />
 
                     <button className="btn-blue-1">
@@ -26,7 +27,7 @@ export default function UserDashboardPage(){
             
             <div className="dash-main-row-center">
                 <Counter
-                value={10}
+                value={0}
                 description="This is session count.It shows your progress as human being.
                 To grow and understand yourself better explore other counsellors"
                 />

@@ -50,10 +50,10 @@ export default function PostReview({counsellor_id, setPostReviewPanel, forceUpda
 
         modal.toast(
             'Successfully posted review. Thanks for taking your time',
-            'success',
+            'success'
         )
         setPostReviewPanel(false)
-        navigate()
+        window.location.reload()
 
     }
 

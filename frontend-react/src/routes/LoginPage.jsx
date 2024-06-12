@@ -112,7 +112,7 @@ export default function LoginPage(){
                     />
             </form>
             <p>
-                <a href="/signin">New User? Create account.. </a>
+                {/* <a href="/signin">New User? Create account.. </a> */}
             </p>
         </div>
     </div>    

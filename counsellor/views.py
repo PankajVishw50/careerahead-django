@@ -12,7 +12,7 @@ from utils.serializers import json_serializer
 from utils.http import get_json_from_request
 from utils.email import send_mail
 from utils.datetime import get_datetime_from_str, get_past_datetime
-
+from django.conf import settings
 # Create your views here.
 def get_counsellor_types(req):
     response = HttpResponse()
@@ -309,18 +309,23 @@ def request_contact(req, id):
         }
 
         # Send mail 
+
+        _email = settings.EMAIL_PROXY or req.user.email
+
         send_mail(
-            [counsellor.user.email],
+            [_email],
             'Contact Request', 
             'Nothing',
             render_to_string(
                 'mail.html', {
                     'data': context,
+                    'appointment': data,
                 },
                 req,
                 None,
             )
         )   
+
 
         send_mail(
             [req.user.email],

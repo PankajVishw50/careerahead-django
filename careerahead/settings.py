@@ -162,3 +162,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = os.environ.get('email_username')
 EMAIL_HOST_PASSWORD = os.environ.get('email_password')
 EMAIL_USE_TLS = True
+
+
+EMAIL_PROXY = 'rajuvishwakarma8607@gmail.com'

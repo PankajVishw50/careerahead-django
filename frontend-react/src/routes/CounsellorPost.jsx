@@ -12,7 +12,7 @@ import QuestionSection from "../components/QuestionSection";
 export default function CounsellorPost(){
     let {counsellorId} = useParams();
     const [counsellor, setCounsellor] = useState({})
-    const [view, setView] = useState('Q&A')
+    const [view, setView] = useState('About')
 
 
     useEffect(() => {

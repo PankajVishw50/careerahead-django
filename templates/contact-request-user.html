@@ -102,7 +102,7 @@
                 </span>
 
                 <span class="user__value">
-                    {{ data.user.username }}
+                    {{ appointment.fromDate }} - {{ appointment.toDate }}
                 </span>
             </div>
 
@@ -110,9 +110,9 @@
                 <span class="user__label">
                     Preffered Time Slot
                 </span>
-
+                
                 <span class="user__value">
-                    {{ data.user.email }}
+                    {{ appointment.toDate }} - {{ appointment.toTime }}
                 </span>
             </div>
 

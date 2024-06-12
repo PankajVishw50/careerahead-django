@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import '../assets/css/AccountWindow.css'
 
-export default function AccountWindow({auth, link}){
+export default function AccountWindow({auth, link, hide_button}){
 
     return (
 
@@ -35,7 +35,14 @@ export default function AccountWindow({auth, link}){
                 <div className="third" />
             </div>
             <div className="acc-window-button">
-                <Link className="btn-green-edit" to={link} role="button">EDIT</Link>
+                {
+                    !hide_button && (
+                        <Link className="btn-green-edit" to={link} role="button" style={{
+                            color: 'black',
+                        }}>PROFILE</Link>
+
+                    )
+                }
             </div>
         </div>
 

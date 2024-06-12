@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.95162326.css",
-    "main.js": "/static/js/main.d04a8b57.js",
+    "main.css": "/static/css/main.a65e2265.css",
+    "main.js": "/static/js/main.9c8733ee.js",
     "static/media/Counseling-PNG-Isolated-Picture.png": "/static/media/Counseling-PNG-Isolated-Picture.890583f4d81c9e42ec3f.png",
     "index.html": "/index.html",
-    "main.95162326.css.map": "/static/css/main.95162326.css.map",
-    "main.d04a8b57.js.map": "/static/js/main.d04a8b57.js.map"
+    "main.a65e2265.css.map": "/static/css/main.a65e2265.css.map",
+    "main.9c8733ee.js.map": "/static/js/main.9c8733ee.js.map"
   },
   "entrypoints": [
-    "static/css/main.95162326.css",
-    "static/js/main.d04a8b57.js"
+    "static/css/main.a65e2265.css",
+    "static/js/main.9c8733ee.js"
   ]
 }

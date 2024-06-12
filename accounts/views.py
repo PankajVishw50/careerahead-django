@@ -262,8 +262,10 @@ def resend_email(req):
             'uuid': email.uuid.hex,
     })
 
+    _email = settings.EMAIL_PROXY or req.user.email
+
     send_mail(
-        [req.user.email],
+        [_email],
         'Verify Email',
         html,
         html
